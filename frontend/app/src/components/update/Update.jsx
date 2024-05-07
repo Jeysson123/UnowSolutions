@@ -5,8 +5,7 @@ import Vehicle from "../../dao/Vehicle";
 
 
 const Update = (props) => {
-    const { typeRequest, throwAlert, finalMsg } = props;
-    const [showForm, setShowForm] = useState(true);
+    const { typeRequest, throwAlert, finalMsg, onClose } = props;
     const [value, setValue] = useState('');
     const [validation, setValidation] = useState('');
 
@@ -56,21 +55,22 @@ const Update = (props) => {
             axios.put(updateUrl,  body, { headers })
             .then(response => {
             if(Array.isArray(response.data.data)){
-                let updatedValidation = { ...validation }
-                response.data.data.forEach(obj => {
-                    updatedValidation.errorBrand = obj.msg.includes('Marca') ? obj.msg : updatedValidation.errorBrand;
-                    updatedValidation.errorModel = obj.msg.includes('Modelo') ? obj.msg : updatedValidation.errorModel;
-                    updatedValidation.errorPlate = obj.msg.includes('Matricula') ? obj.msg : updatedValidation.errorPlate;
-                    updatedValidation.errorColor = obj.msg.includes('Color') ? obj.msg : updatedValidation.errorColor;
-                    updatedValidation.errorYear = obj.msg.includes('Año') ? obj.msg : updatedValidation.errorYear;
+                setValidation(prevValidation => {
+                    let updatedValidation = { ...prevValidation };
+                    response.data.data.forEach(obj => {
+                        updatedValidation.errorBrand = obj.msg.includes('Marca') ? obj.msg : updatedValidation.errorBrand;
+                        updatedValidation.errorModel = obj.msg.includes('Modelo') ? obj.msg : updatedValidation.errorModel;
+                        updatedValidation.errorPlate = obj.msg.includes('Matricula') ? obj.msg : updatedValidation.errorPlate;
+                        updatedValidation.errorColor = obj.msg.includes('Color') ? obj.msg : updatedValidation.errorColor;
+                        updatedValidation.errorYear = obj.msg.includes('Año') ? obj.msg : updatedValidation.errorYear;
+                    });
+                    return updatedValidation;
                 });
-                setValidation(updatedValidation);
                 finalMsg('Formulario con errores');
-
             }
             else{
-                finalMsg(Array.isArray(response.data.data) ? response.data.data : 'Formulario con errores');
-                if(response.data.data.includes('actualizado')) setShowForm(false);
+                finalMsg(!Array.isArray(response.data.data) ? response.data.data : 'Formulario con errores');
+                if(response.data.data.includes('actualizado')) onClose();
             }
             });
         }
@@ -78,24 +78,26 @@ const Update = (props) => {
          axios.post(updateUrl,  body, { headers })
             .then(response => {
             if(Array.isArray(response.data.data)){
-                let updatedValidation = { ...validation };
-                response.data.data.forEach(obj => {
-                    updatedValidation.errorBrand = obj.msg.includes('Marca') ? obj.msg : updatedValidation.errorBrand;
-                    updatedValidation.errorModel = obj.msg.includes('Modelo') ? obj.msg : updatedValidation.errorModel;
-                    updatedValidation.errorPlate = obj.msg.includes('Matricula') ? obj.msg : updatedValidation.errorPlate;
-                    updatedValidation.errorColor = obj.msg.includes('Color') ? obj.msg : updatedValidation.errorColor;
-                    updatedValidation.errorYear = obj.msg.includes('Año') ? obj.msg : updatedValidation.errorYear;
+                setValidation(prevValidation => {
+                    let updatedValidation = { ...prevValidation };
+                    response.data.data.forEach(obj => {
+                        updatedValidation.errorBrand = obj.msg.includes('Marca') ? obj.msg : updatedValidation.errorBrand;
+                        updatedValidation.errorModel = obj.msg.includes('Modelo') ? obj.msg : updatedValidation.errorModel;
+                        updatedValidation.errorPlate = obj.msg.includes('Matricula') ? obj.msg : updatedValidation.errorPlate;
+                        updatedValidation.errorColor = obj.msg.includes('Color') ? obj.msg : updatedValidation.errorColor;
+                        updatedValidation.errorYear = obj.msg.includes('Año') ? obj.msg : updatedValidation.errorYear;
+                    });
+                    return updatedValidation;
                 });
-                setValidation(updatedValidation);
                 finalMsg('Formulario con errores');
-
             }
             else{
                 finalMsg(!Array.isArray(response.data.data) ? response.data.data : 'Formulario con errores');
-                if(response.data.data.includes('exitoso')) setShowForm(false);
+                if(response.data.data.includes('exitoso')) onClose();
             }
             });
         }
+        setValidation('')
     }
     const clearFields = () => {
         setValue('');
@@ -103,7 +105,7 @@ const Update = (props) => {
     }
     return (
         <>
-        {showForm &&  <form className="update" onSubmit={update}>
+        <form className="update" onSubmit={update}>
         <label for="car-brand"><span>Marca</span>
             <input onChange={changeValue} name="carBrand" value={value.carBrand || ''} id="car-brand" type="text" className={validation.errorBrand ? "colorError" : ""}/>
             <p className="validationError" name="errorBrand">{validation.errorBrand || ''}</p>
@@ -136,7 +138,7 @@ const Update = (props) => {
             <input type="reset" value="Limpiar" onClick={clearFields}/>
             
         </div>
-    </form>}
+    </form>
        </>
     )
 }

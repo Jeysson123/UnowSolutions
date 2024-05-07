@@ -4,7 +4,7 @@ import './Styles.css';
 import Card from '../card/Card';
 
 const Landing = (props) => {
-    const {throwAlert, finalMsg, listSize, index, qtyPage } = props;
+    const {throwAlert, finalMsg, listSize, index, qtyPage, onClose } = props;
     const [listVehicles, setListVehicles] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");  
     useEffect(() => {
@@ -50,22 +50,23 @@ const Landing = (props) => {
         listSize(listVehicles.length);
         let vehiclesToShow = [];
         if(searchTerm !== "") {
-          // Filter the list of vehicles based on the search term
           const vehiclesFiltered = listVehicles.filter(item => 
-            item.brand.toLowerCase().startsWith(searchTerm.toLowerCase())
-            || item.model.toLowerCase().startsWith(searchTerm.toLowerCase())
-            || item.licensePlate.toLowerCase().startsWith(searchTerm.toLowerCase())
+            item.brand.toLowerCase().startsWith(searchTerm.toLowerCase()) || item.brand.toLowerCase().includes(searchTerm.toLowerCase())
+            || item.model.toLowerCase().startsWith(searchTerm.toLowerCase()) || item.model.toLowerCase().includes(searchTerm.toLowerCase())
+            || item.licensePlate.toLowerCase().startsWith(searchTerm.toLowerCase() || item.licensePlate.toLowerCase().includes(searchTerm.toLowerCase()))
           );
     
           vehiclesToShow = vehiclesFiltered.map((item, index) => (
             <div key={index}>
-              <Card vehicle={item} throwAlert={throwAlert} finalMsg={finalMsg}/>
+              <Card vehicle={item} throwAlert={throwAlert} finalMsg={finalMsg} onClose={onClose}/>
             </div>
           ));
+          
+          if(vehiclesToShow.length === 0) return "Sin Resultados";
         } else {
           vehiclesToShow = listVehicles.map((item, index) => (
             <div key={index}>
-              <Card vehicle={item} throwAlert={throwAlert} finalMsg={finalMsg}/>
+              <Card vehicle={item} throwAlert={throwAlert} finalMsg={finalMsg} onClose={onClose}/>
             </div>
           ));
         }

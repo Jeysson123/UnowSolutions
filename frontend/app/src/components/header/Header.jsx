@@ -14,8 +14,12 @@ const Header = ({registerVisible}) => {
         return () => clearInterval(intervalId);
     }, [searchTerm]);
 
-    const changeTerm = e => {
+    const changeTerm = (e) => {
         setSearchTerm(e.target.value);
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') storeTerm(e);
     }
 
     const storeTerm = (e) => {
@@ -39,6 +43,7 @@ const Header = ({registerVisible}) => {
             <div className="search-area">
                 <input type="text" 
                 className="search-bar"
+                onKeyDown={handleKeyDown}
                 onChange={changeTerm}
                 value={searchTerm} />
                 <button className="search-btn"><img alt="Lupa" src={Lupa} onClick={storeTerm}/></button>

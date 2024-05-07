@@ -1,6 +1,6 @@
 export default class ImgUtils {
     static CustomImage(brand) {
-        let image = '';
+        let image = 'default.png';
         if(brand.toLowerCase().startsWith('bm')){
             image = 'bmw.png';
         } else if(brand.toLowerCase().startsWith('che')){

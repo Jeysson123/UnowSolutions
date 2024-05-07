@@ -6,9 +6,9 @@ import Detail from "../detail/Detail";
 import ImgUtils from "../../utils/ImgUtils";
 
 const Card = (props) => {
-    const {throwAlert, finalMsg } = props;
-    const [showForm, setShowForm] = useState(false);
+    const {throwAlert, finalMsg, onClose } = props;
     const [showDetail, setShowDetail] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     const showAlert = (e) => {
         const result = window.confirm("Quieres eliminar este vehiculo?");
@@ -26,14 +26,20 @@ const Card = (props) => {
         axios
           .delete(removeEndpoint, { headers })
           .then((response) => {
-            localStorage.setItem('popupMsg', !Array.isArray(response.data.data) ? response.data.data : '');
-            localStorage.setItem('showPopup', false);
+            finalMsg(!Array.isArray(response.data.data) ? response.data.data : '');
+            throwAlert(true);
+
           })
           .catch((error) => console.log(error));
       };
+
+    const closeUpdate = () => {
+        setShowForm(false);
+    }
+
     return (
         <div>
-         {showForm && <Update typeRequest="update" id={props.vehicle.id} throwAlert={throwAlert} finalMsg={finalMsg} />}
+         {showForm && <Update typeRequest="update" id={props.vehicle.id} throwAlert={throwAlert} finalMsg={finalMsg} onClose={closeUpdate}/>}
          {showDetail && <Detail vehicle={props.vehicle}/>}
         <div className="card">
             <div className="img-container" onClick={() => setShowDetail(true)}>

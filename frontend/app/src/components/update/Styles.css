@@ -47,6 +47,7 @@ label > input {
     width: 3em;
     border: 0;
     border-bottom: 1px solid rgba(119, 136, 153, 0.25);
+    background-color: transparent;
     
     &:focus {
         outline: 0;

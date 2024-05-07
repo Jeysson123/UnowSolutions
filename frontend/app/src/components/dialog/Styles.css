@@ -1,28 +1,65 @@
 .popup-message {
-    position: fixed;
-    top: 3em;
-    right: 1em;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 5em;
+  right: 1em;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+  display: flex;
+  gap: .5em;
+  align-items: center;
+  justify-content: space-between;
+   
+  & span {
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    letter-spacing: 1px;
   }
+}  
+
+.popupClose {
+  width: 1em;
+  aspect-ratio: 1;
+  position: relative;
+  display: grid;
+  place-items: center;
   
-  .popup-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &:hover {
+      cursor: pointer;
   }
-  
-  .popup-content button {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .popup-content button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.popupClose:hover::after,
+.popupClose:hover::before {
+  background-color: crimson;
+  filter: drop-shadow(0 0 5px black);
+  width: 180%;
+}
+
+.popupClose::after {
+  content: " ";
+  rotate: 45deg;
+  width: 150%;
+  height: 2px;
+  border-radius: 5px;
+  position: absolute;
+  background-color: grey;
+  transition: all 100ms ease-out;
+}
+
+.popupClose::before {
+  content: " ";
+  rotate: 135deg;
+  width: 150%;
+  height: 2px;
+  border-radius: 5px;
+  position: absolute;
+  background-color: grey;
+  transition: all 350ms ease-in;
+}

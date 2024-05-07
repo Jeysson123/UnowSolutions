@@ -30,7 +30,7 @@ public class Vehicle {
     private String brand;
 
     @NotEmpty(message = "Modelo requerido")
-    @Size(min = 3, max = 20, message = "Modelo este campo debe contener entre 3 y 20 caracteres.")
+    @Size(min = 3, max = 40, message = "Modelo este campo debe contener entre 3 y 40 caracteres.")
     @Column(name = "model")
     private String model;
 

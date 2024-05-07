@@ -21,6 +21,7 @@ public class ValidationsUtils {
     @Autowired
     private CommonComponent commonComponent;
     private final String regexText = "\\b[A-Za-z ]+\\b";
+    private final String regexModel = "\\b[A-Za-z0-9 ]+\\b";
     private final String regexLicensePlate = "\\b\\d{4} [A-Z]{3}\\b";
     private final String regexYear = "\\d{4}";
     private Map<String, FieldForm> REGEX_PATTERNS;
@@ -36,7 +37,7 @@ public class ValidationsUtils {
         REGEX_PATTERNS = new HashMap<String, FieldForm>() {{
             put("brand", FieldForm.builder().regex(regexText).msg(commonComponent.InvalidData.replace("{0}", "Marca")
                     .replace("{1}", "#TEXTO#")).build());
-            put("model", FieldForm.builder().regex(regexText).msg(commonComponent.InvalidData.replace("{0}", "Modelo")
+            put("model", FieldForm.builder().regex(regexModel).msg(commonComponent.InvalidData.replace("{0}", "Modelo")
                     .replace("{1}", "#TEXTO#")).build());
             put("licensePlate", FieldForm.builder().regex(regexLicensePlate).msg(commonComponent.InvalidData.replace("{0}", "Matricula")
                     .replace("{1}", "#0000 ABC#")).build());
