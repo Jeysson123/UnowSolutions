@@ -1,0 +1,156 @@
+@property --porcent {
+	syntax: '<percentage>';
+	initial-value: 7.5%;
+	inherits: false;
+}
+
+.poetsen-one-regular {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+header {
+    background-color: whitesmoke;
+    background-image: radial-gradient(circle at 50% 50%, rgb(70, 70, 70), rgb(45, 45, 45) var(--porcent));
+    height: 10vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: --porcent 350ms ease-in;
+}
+
+header > * {
+    margin-inline: 1em;
+}
+
+.search-area {
+    display: flex;
+    align-items: center;
+    background-color: rgba(100, 100, 100, 0.5);
+    backdrop-filter: blur(5px);
+    padding: .5em;
+    border-radius: 10px;
+}
+
+:is(header:has(.search-area:hover, .search-bar:not([value=""]))) {
+    --porcent: 30%;
+
+    & .search-area {
+        box-shadow: 0 0 5px darksalmon;
+    }
+
+    & .logo-container::before {
+        opacity: 0;
+        letter-spacing: 10px;
+        font-size: 3em;
+    }
+
+    & .logo {
+        animation-duration: 5s;
+    }
+}
+
+.search-bar:not([value=""]) {
+    width: 10em;
+    padding-inline: 1em .25em;
+}
+
+:is(.search-bar, .search-btn) {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    caret-color: white;
+    color: white;
+    text-align: center;
+}
+
+.search-bar {
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 1.15rem;
+    width: 0;
+    transition: width 350ms ease-in-out;
+}
+
+.search-area:hover .search-bar {
+    padding-inline: 1em .25em;
+    width: 10em;
+}
+
+.search-btn img {
+    width: 1.5em;
+    aspect-ratio: 1;
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    filter: drop-shadow(0 0 3px whitesmoke);
+}
+
+.add-vehicle {
+    width: min-content;
+    aspect-ratio: 1;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border: 1px solid hsla(15, 72%, 70%, 0.25);
+    padding: .5em .75em;
+    outline: 0;
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 350ms ease-in;
+}
+
+.add-vehicle:hover {
+    box-shadow: 0 0 5px whitesmoke;
+    cursor: pointer;
+    background-color: darksalmon;
+}
+
+.logo-container {
+    width: 4em;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container::before {
+    content: "Unow Solutions";
+    position: absolute;
+    left: 4.5rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: clamp(1rem, 2.5vmax, 2rem);
+    font-weight: 600;
+    font-family: "Poetsen One", sans-serif;
+    transition: all ease-out 350ms;
+    transition-delay: 1s;
+}
+
+.logo {
+    background-image: url('../../images/logo.jpg');
+    background-size: cover;
+    border-radius: 50%;
+    width: 100%;
+    aspect-ratio: 1;
+    animation-name: rotateImg;
+    animation-iteration-count: infinite;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+}
+
+@keyframes rotateImg {
+    to {
+        rotate: 360deg;
+    }
+}

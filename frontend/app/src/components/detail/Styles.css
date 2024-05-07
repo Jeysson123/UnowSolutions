@@ -1,0 +1,180 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@property --rotateBorder {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.details {
+    background-image: repeating-conic-gradient(from var(--rotateBorder), tomato 0%, darksalmon 5%, transparent 5%, transparent 40%, tomato 50%);
+    font-size: 1.5rem;
+    width: 35em;
+    margin: 1em;
+    aspect-ratio: 2/1;
+    padding: 1em;
+    filter: drop-shadow(0 3px 15px grey);
+    outline: 1px solid lightgrey;
+    outline-offset: 15px;
+    border-radius: 5px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    animation-name: rotateBorder;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    position: fixed;
+    top: 10em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 75;
+}
+
+.details > * {
+    z-index: 100;
+}
+
+.details::after {
+    content: '';
+    width: calc(100% - .15em);
+    height: calc(100% - .15em);
+    border-radius: 3px;
+    position: absolute;
+    background-image: radial-gradient(circle at 10% 125%, darksalmon, lightgrey 50%);
+}
+
+.detailsBrand {
+    font-weight: bolder;
+    text-align: center;
+    font-size: clamp(1.5rem, 5vmax, 3rem);
+    color: darkslategrey;
+    position: absolute;
+    left: .5em;
+    top: .5em;
+}
+
+.detailsModel {
+    font-weight: bolder;
+    text-align: center;
+    font-size: clamp(1.5rem, 5vmax, 3rem);
+    color: darkslategrey;
+    position: absolute;
+    right: .5em;
+    top: .5em;
+}
+
+.detailsMake {
+    font-weight: bolder;
+    text-align: center;
+    font-size: clamp(1.5rem, 5vmax, 3rem);
+    color: darkslategrey;
+    position: absolute;
+    left: .5em;
+    bottom: .5em;
+}
+
+.detailsColor {
+    font-weight: bolder;
+    text-align: center;
+    font-size: clamp(1.5rem, 5vmax, 3rem);
+    color: darkslategrey;
+    position: absolute;
+    right: .5em;
+    bottom: .5em;
+}
+
+.detailsClose {
+    width: .75em;
+    aspect-ratio: 1;
+    position: absolute;
+    left: 50%;
+    bottom: .5em;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
+    
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.detailsClose:hover::after,
+.detailsClose:hover::before {
+    background-color: crimson;
+    filter: drop-shadow(0 0 5px black);
+    width: 180%;
+}
+
+.detailsClose::after {
+    content: " ";
+    rotate: 45deg;
+    width: 150%;
+    height: 2px;
+    border-radius: 5px;
+    position: absolute;
+    background-color: grey;
+    transition: all 100ms ease-out;
+}
+
+.detailsClose::before {
+    content: " ";
+    rotate: 135deg;
+    width: 150%;
+    height: 2px;
+    border-radius: 5px;
+    position: absolute;
+    background-color: grey;
+    transition: all 350ms ease-in;
+}
+
+.detailsPlate {
+    text-align: center;
+    font-weight: bolder;
+    letter-spacing: 10px;
+    font-size: clamp(4rem, 15vmax, 7rem);
+    color: white;
+    -webkit-text-stroke: 3px darkslategrey;
+    filter: drop-shadow(0 3px 3px darkslategrey);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+}
+
+.maskContainer {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .25;
+    z-index: 50;
+}
+
+@keyframes rotateBorder {
+    from {
+        --rotateBorder: 0deg;
+    }
+    to {
+        --rotateBorder: 360deg;
+    }
+}

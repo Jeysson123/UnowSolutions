@@ -1,0 +1,13 @@
+com.unowsolutions.common
+com.unowsolutions.common.components
+com.unowsolutions.common.dtos
+com.unowsolutions.common.entitys
+com.unowsolutions.common.enums
+com.unowsolutions.common.exceptions
+com.unowsolutions.common.repositories
+com.unowsolutions.common.services
+com.unowsolutions.common.services.impl
+com.unowsolutions.common.utils
+com.unowsolutions.vehicles
+com.unowsolutions.vehicles.config
+com.unowsolutions.vehicles.controllers

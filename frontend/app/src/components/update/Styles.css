@@ -1,0 +1,97 @@
+.validationError {
+    color: crimson;
+    font-size: .5em;
+    text-align: center;
+}
+.colorError{
+    border-color: crimson;
+}
+
+.update {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+    box-shadow: 0 2px 3px grey;
+    padding: 2em;
+    border-radius: 5px;
+    width: 25em;
+    position: fixed;
+    z-index: 1000;
+    background-color: whitesmoke;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+label > span {
+    transition: all 350ms ease-in;
+    position: relative;
+    top: 1em;
+    
+}
+
+label > input {
+    transition: all 350ms ease-in;
+    text-align: center;
+    font-size: 1.25rem;
+    width: 3em;
+    border: 0;
+    border-bottom: 1px solid rgba(119, 136, 153, 0.25);
+    
+    &:focus {
+        outline: 0;
+    }
+}
+
+label:has(input:focus) {
+    & span {
+        top: 0;
+        font-size: 1.25rem;
+    }
+    
+    & input {
+        width: 10em;
+        border-bottom: 1px solid rgba(119, 136, 153);
+    }
+}
+
+label:not(:has(input[value=""])) {
+    & span {
+        top: 0;
+    }
+    
+    & input {
+        width: max-content;
+    }
+}
+
+.update-btn-container {
+    display: flex;
+    gap: .5em;
+}
+
+input:is([type="submit"], [type="reset"]) {
+    background-color: transparent;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: 0;
+    font-size: 1rem;
+    padding: .5em .75em;
+}
+
+input:is([type="submit"], [type="reset"]):hover {
+    background-color: darksalmon;
+    cursor: pointer;
+    border-color: darkgrey;
+    box-shadow: 0 1px 3px lightgrey;
+}
