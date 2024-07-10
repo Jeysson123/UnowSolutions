@@ -14,7 +14,7 @@
 	<name>vehicles</name>
 	<description>Project for manage maintenance of vehicles</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

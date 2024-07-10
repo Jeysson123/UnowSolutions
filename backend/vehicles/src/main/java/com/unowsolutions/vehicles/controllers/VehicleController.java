@@ -48,8 +48,7 @@ public class VehicleController {
                         .build();
             }
             listVehicles.sort(Comparator.comparing(Vehicle::getYear));
-            return ResponseWrapper.builder().code(HttpStatus.OK.value()).msg(commonComponent.ListFound)
-                    .data(listVehicles).build();
+            return ResponseWrapper.builder().code(HttpStatus.OK.value()).msg(commonComponent.ListFound).data(listVehicles).build();
         }
         catch (Exception e){
             throw new CustomException(String.format(commonComponent.ApiProblem, e.getMessage()));
